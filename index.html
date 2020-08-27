@@ -182,7 +182,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/27/FirstBlog/" class="post-title-link" itemprop="url">开篇博客</a>
+            <a href="/2020/08/27/FirstBlog/" class="post-title-link" itemprop="url">CocoaPods安装方法-2020.08.27</a>
         </h2>
 
         <div class="post-meta">
@@ -193,7 +193,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-27 14:15:15 / 修改时间：14:19:39" itemprop="dateCreated datePublished" datetime="2020-08-27T14:15:15+08:00">2020-08-27</time>
+              <time title="创建时间：2020-08-27 14:15:15 / 修改时间：14:36:36" itemprop="dateCreated datePublished" datetime="2020-08-27T14:15:15+08:00">2020-08-27</time>
             </span>
 
           
@@ -207,7 +207,72 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>布拉，布拉</p>
+          <hr>
+<p>#正文<br>自己装过很多次CocoaPod,中间遇到过各种烦人的问题,也促使自己在不断的摸索中学习到了很多,总结一下,供大家学习研究,以下过程经本人新机测试,一路畅通无任何错误(请严格按照下述方法来做),中间有网络不好的可能会下载中断出错,只要从新执行一下命令就行了.</p>
+<p>###CocoaPods简介:</p>
+<p>CocoaPods是一个用Ruby写的、负责管理iOS项目中第三方开源库的工具，CocoaPods能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。</p>
+<p>###CocoaPods安装:</p>
+<p>下面就正式开始安装CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行；</p>
+<p>因为Mac电脑自带Ruby环境，我们就只需打开终端开始动手。然而又因为默认情况下我们mac系统自带的Ruby环境版本比较低（大概是2.0.0或者其他较高版本），但是现在安装CocoaPods需要2.2.2版本及以上的，所以我们不管三七二十一先直接先升级ruby。</p>
+<p>######打开终端：&gt;_</p>
+<p>#####1、查看当前Ruby版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ruby -v</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>#####2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -L get.rvm.io | bash -s stable </span><br><span class="line"></span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line"></span><br><span class="line">source ~&#x2F;.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>#####3、查看rvm版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm -v </span><br></pre></td></tr></table></figure>
+
+<p>显示如下(或者是其他版本)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.3 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https:&#x2F;&#x2F;rvm.io]</span><br></pre></td></tr></table></figure>
+<p>#####4、列出ruby可安装的版本信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm list known</span><br></pre></td></tr></table></figure>
+<p>显示如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># MRI Rubies</span><br><span class="line">[ruby-]1.8.6[-p420]</span><br><span class="line">[ruby-]1.8.7[-head] # security released on head</span><br><span class="line">[ruby-]1.9.1[-p431]</span><br><span class="line">[ruby-]1.9.2[-p330]</span><br><span class="line">[ruby-]1.9.3[-p551]</span><br><span class="line">[ruby-]2.0.0[-p648]</span><br><span class="line">[ruby-]2.1[.10]</span><br><span class="line">[ruby-]2.2[.10]</span><br><span class="line">[ruby-]2.3[.7]</span><br><span class="line">[ruby-]2.4[.4]</span><br><span class="line">[ruby-]2.5[.1] </span><br><span class="line">.....</span><br><span class="line">[ruby-]2.6[.3]  &#x2F;&#x2F; 重点在这里 重点在这里 重点在这里</span><br><span class="line">[ruby-]2.7[.0-preview1]   &#x2F;&#x2F; 测试版</span><br><span class="line">ruby-head</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+<p>#####5、安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">rvm install 2.6.3</span><br><span class="line">&#x2F;&#x2F; 注意:安装过程中需要两次按下 Enter 键, 第二次按下后需要输入电脑访问密码(不可见,只管输入就行);</span><br><span class="line">&#x2F;&#x2F; 如果你电脑没有安装Xcode和Command Line Tools for Xcode以及Homebrew 会自动下载安装,建议提前安装这三者.</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">这里很多小伙伴会遇到错误，大部分是因为没有安装Homebrew造成，所以所以所以要提前安装比较好</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#####6、设置为默认版本</span><br></pre></td></tr></table></figure>
+<p>rvm use 2.6.3 –default</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#####7、更换源</span><br></pre></td></tr></table></figure>
+<p>sudo gem update –system</p>
+<p>gem sources –remove <a target="_blank" rel="noopener" href="https://rubygems.org/">https://rubygems.org/</a></p>
+<p>gem sources –add <a target="_blank" rel="noopener" href="https://gems.ruby-china.com/">https://gems.ruby-china.com/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#####8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看</span><br></pre></td></tr></table></figure>
+<p>gem sources -l</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果是以下结果说明正确，如果有其他的请自行百度解决</span><br></pre></td></tr></table></figure>
+<p><strong>* CURRENT SOURCES *</strong></p>
+<p><a target="_blank" rel="noopener" href="https://gems.ruby-china.com/">https://gems.ruby-china.com/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#####9、这时候才正式开始安装CocoaPods</span><br></pre></td></tr></table></figure>
+<p>sudo gem install -n /usr/local/bin cocoapods</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#####10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）</span><br></pre></td></tr></table></figure>
+<p>sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#####11、安装本地库</span><br></pre></td></tr></table></figure>
+<p>pod setup</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#####12、执行以上命令后</span><br></pre></td></tr></table></figure>
+<p>Setting up CocoaPods master repo<br>  $ /usr/bin/git clone <a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git">https://github.com/CocoaPods/Specs.git</a> master –progress<br>  Cloning into ‘master’…<br>  remote: Counting objects: 1879515, done.<br>  remote: Compressing objects: 100% (321/321), done.<br>  Receiving objects:  21% (404525/1879515), 73.70 MiB | 22.00 KiB/</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">然后就是漫长的等待，当然,网络好的情况下会更快</span><br><span class="line"></span><br><span class="line">#重点来了，注意</span><br><span class="line">最新版的MacOS Catalina系统命令行执行pod setup命令直接结束啦；</span><br><span class="line">莫着急，我们手动安装本地库，速度绝对快</span><br><span class="line">命令行执行以下操作</span><br></pre></td></tr></table></figure>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git">https://github.com/CocoaPods/Specs.git</a> ~/.cocoapods/repos/trunk<br>注意：<br>注意：<br>注意：<br>重要的事情要重申：</p>
+<p>使用这个命令执行等待一段时间之后大有可能会失败，<br>原因基本是网络问题，<br>请不要着急，<br>根据自己和小伙伴的多次测试，<br>只有在使用移动手机网络或者在凌晨的时候网速才会理想<br>（大概几分钟就OK，其他情况下即使你的网络带宽很好也没用）</p>
+<p>如果你晚上熬不住，早上起不来，手机流量又没了，那就往下看吧！哎。。。。。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">或者使用下面的，国内镜像，速度刚刚的</span><br></pre></td></tr></table></figure>
+<p>git clone <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git">https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git</a>  ~/.cocoapods/repos/trunk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">目录结构见下图,如果不是就自己手动移动一下</span><br><span class="line">![Snip20191011_2.png](https:&#x2F;&#x2F;upload-images.jianshu.io&#x2F;upload_images&#x2F;1974693-c13a2a46bc31e2d0.png?imageMogr2&#x2F;auto-orient&#x2F;strip%7CimageView2&#x2F;2&#x2F;w&#x2F;1000)</span><br><span class="line"></span><br><span class="line">如果还不行</span><br></pre></td></tr></table></figure>
+<p>// 安装最新版cocoapods<br>sudo gem install cocoapods –pre<br>// 移除本地master<br>sudo rm -fr ~/.cocoapods/repos/master<br>// 移除本地缓存<br>sudo rm -fr ~/Library/Caches/CocoaPods/<br>// 重新setup，如果很慢可使用问题1的解决方法（git clone）<br>pod setup –verbose<br>// 移除trunk<br>pod repo remove trunk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">可以参考：[CocoaPods｜安装流程与使用（macOS-Mojave）](https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;4ed3645a410a)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[如果一直安装不成功请参考这里](www.jianshu.com&#x2F;p&#x2F;426001721ed9)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#####以下一段忽略,直接看  第13步:</span><br><span class="line"></span><br><span class="line">要查看文件下载进度的可以另外打开一个终端窗口(快捷键:选中终端按下Command+N组合键)，输入以下两行命令回车执行</span><br></pre></td></tr></table></figure>
+<p>cd ~/.cocoapods</p>
+<p>du -sh *</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">执行du -sh *之后会显示已下载的文件大小，可以多次执行来监看下载进度，如果之前还有文件大小，后来变成0了，可能是网络问题，下载已经中断了,需要结束命令并从新执行 pod setup</span><br><span class="line"></span><br><span class="line">#####13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）</span><br></pre></td></tr></table></figure>
+<p>pod search AFNetworking</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#####14、CocoaPods的具体使用</span><br><span class="line"></span><br><span class="line">新建一个Xcode工程，使用终端cd到工程目录下</span><br><span class="line"></span><br><span class="line">创建Podfile文件：</span><br></pre></td></tr></table></figure>
+<p>pod init</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">之后就可以在项目目录里看到一个Podfile文件</span><br><span class="line"></span><br><span class="line">打开Podfile文件：</span><br></pre></td></tr></table></figure>
+<p>open Podfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">添加：</span><br></pre></td></tr></table></figure>
+<p>pod ‘AFNetworking’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">保存后退出</span><br><span class="line"></span><br><span class="line">开始下载：</span><br></pre></td></tr></table></figure>
+<p>pod install</p>
+<p>```<br>我这里第一次都会出错，只要再次(看人品)执行就好了，可能是网络或者其他的原因。</p>
+<p>#<a href="">到此 Success ！</a><br>#<a href="">如有问题可以先自行检索错误原因及解决办法</a></p>
 
       
     </div>
